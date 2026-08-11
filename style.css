@@ -17,6 +17,13 @@ body{
     overflow:hidden;
 }
 
+#hearts {
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+}
+
 /* Glass Card */
 
 .container{
@@ -237,4 +244,6 @@ transform:translateY(0);
     pointer-events:none;
     display:block;
     filter:drop-shadow(0 12px 20px rgba(255,105,180,0.18));
+    position:absolute;
+    z-index:0;
 }

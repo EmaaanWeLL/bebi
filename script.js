@@ -29,12 +29,13 @@ function createHeart(){
     let size = 18 + Math.random() * 24;
     if (makeFlower) {
         const imageIndex = Math.floor(Math.random() * 3) + 1;
-        el.src = `./images/flower${imageIndex}.png`;
+        el.src = `images/flower${imageIndex}.png`;
         el.alt = "floating flower";
         el.classList.add('float-flower');
-        el.crossOrigin = "anonymous";
-        size = size * 4; // make flowers 100% bigger
+        size = size * 4; // make flowers bigger
         el.style.width = size + "px";
+        el.style.height = "auto";
+        el.style.zIndex = 0;
     } else {
         const makeThird = Math.random() < 0.30; // smaller chance for the 3rd text
         if (makeThird) {
@@ -75,6 +76,7 @@ const missMeButton = document.getElementById("missMeButton");
 const favePicButton = document.getElementById("favePicButton");
 const notMadButton = document.getElementById("notMadButton");
 const monthsButton = document.getElementById("monthsButton");
+const bullyButton = document.getElementById("bullyButton");
 const missMeScreen = document.getElementById("missMeScreen");
 const faveScreen = document.getElementById("faveScreen");
 const notMadScreen = document.getElementById("notMadScreen");
@@ -86,10 +88,13 @@ const bgMusic2 = document.getElementById("bgMusic2");
 const bgMusic3 = document.getElementById("bgMusic3");
 const bgMusicMonths = document.getElementById("bgMusicMonths");
 const bgMusic4 = document.getElementById("bgMusic4");
+const bgMusic6 = document.getElementById("bgMusic6");
 const playSong2Button = document.getElementById("playSong2Button");
 const playMonthsButton = document.getElementById("playMonthsButton");
 const monthsBackButton = document.getElementById("monthsBackButton");
 const monthsMessageDisplay = document.getElementById("monthsMessageDisplay");
+const bullyScreen = document.getElementById("bullyScreen");
+const bullyBackButton = document.getElementById("bullyBackButton");
 
 function switchScreen(showScreen, hideScreen) {
     if (!showScreen || !hideScreen) return;
@@ -265,6 +270,40 @@ if (monthsBackButton) {
     monthsBackButton.addEventListener("click", () => {
         if (bgMusicMonths && !bgMusicMonths.paused) bgMusicMonths.pause();
         switchScreen(menuScreen, monthsScreen);
+    });
+}
+
+if (bullyButton) {
+    bullyButton.addEventListener("click", async () => {
+        if (music && !music.paused) {
+            music.pause();
+            musicButton.textContent = "🎵 Play Music (guess what song this is)";
+        }
+        if (bgMusic2 && !bgMusic2.paused) {
+            bgMusic2.pause();
+            playSong2Button.textContent = "🎵 Play ze Song";
+        }
+        if (bgMusic3 && !bgMusic3.paused) {
+            bgMusic3.pause();
+        }
+        if (bgMusic4 && !bgMusic4.paused) {
+            bgMusic4.pause();
+        }
+        if (bgMusic6) {
+            try {
+                await bgMusic6.play();
+            } catch (error) {
+                console.error("song6 could not be played:", error);
+            }
+        }
+        switchScreen(bullyScreen, menuScreen);
+    });
+}
+
+if (bullyBackButton) {
+    bullyBackButton.addEventListener("click", () => {
+        if (bgMusic6 && !bgMusic6.paused) bgMusic6.pause();
+        switchScreen(menuScreen, bullyScreen);
     });
 }
 
