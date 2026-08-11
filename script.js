@@ -81,9 +81,11 @@ const missMeScreen = document.getElementById("missMeScreen");
 const faveScreen = document.getElementById("faveScreen");
 const notMadScreen = document.getElementById("notMadScreen");
 const monthsScreen = document.getElementById("monthsScreen");
+const bullyScreen = document.getElementById("bullyScreen");
 const missMeBackButton = document.getElementById("missMeBackButton");
 const faveBackButton = document.getElementById("faveBackButton");
 const notMadBackButton = document.getElementById("notMadBackButton");
+const bullyBackButton = document.getElementById("bullyBackButton");
 const bgMusic2 = document.getElementById("bgMusic2");
 const bgMusic3 = document.getElementById("bgMusic3");
 const bgMusicMonths = document.getElementById("bgMusicMonths");
@@ -93,8 +95,6 @@ const playSong2Button = document.getElementById("playSong2Button");
 const playMonthsButton = document.getElementById("playMonthsButton");
 const monthsBackButton = document.getElementById("monthsBackButton");
 const monthsMessageDisplay = document.getElementById("monthsMessageDisplay");
-const bullyScreen = document.getElementById("bullyScreen");
-const bullyBackButton = document.getElementById("bullyBackButton");
 
 function switchScreen(showScreen, hideScreen) {
     if (!showScreen || !hideScreen) return;
@@ -247,8 +247,6 @@ if (monthsButton) {
     });
 }
 
-// delegated fallback removed — monthsButton now uses the same handler style as other buttons
-
 if (playMonthsButton && bgMusicMonths) {
     playMonthsButton.addEventListener("click", async () => {
         try {
@@ -302,9 +300,9 @@ if (bullyButton) {
 
 if (bullyBackButton) {
     bullyBackButton.addEventListener("click", () => {
-        if (bgMusic6 && !bgMusic6.paused) bgMusic6.pause();
+        if (bgMusic6 && !bgMusic6.paused) {
+            bgMusic6.pause();
+        }
         switchScreen(menuScreen, bullyScreen);
     });
 }
-
-// No editable message box — months message is set when opening the months screen.
